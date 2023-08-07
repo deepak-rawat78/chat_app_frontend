@@ -12,7 +12,7 @@ export default function Login() {
 	const { user } = useCurrentUser();
 	const { login } = useLogin();
 	const { push } = useRouter();
-	
+
 	useEffect(() => {
 		if (user) {
 			push("/home");
@@ -46,6 +46,7 @@ export default function Login() {
 						setEmail(e.target.value);
 					}}
 					placeholder="email"
+					className="border-2 rounded mr-2 p-2 text-inherit"
 				/>
 				<input
 					type="text"
@@ -55,8 +56,13 @@ export default function Login() {
 						setPassword(e.target.value);
 					}}
 					placeholder="password"
+					className="border-2 rounded mr-2 p-2 text-inherit"
 				/>
-				<input type="submit" title="Login" style={{ border: "1px" }} />
+				<input
+					type="submit"
+					title="Login"
+					className="border-2 py-2 px-4 rounded-full bg-black text-white"
+				/>
 			</form>
 		</main>
 	);

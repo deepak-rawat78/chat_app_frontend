@@ -17,17 +17,17 @@ const Home = () => {
 		return <div>Loading... </div>;
 	}
 	return (
-		<div>
+		<div className="mt-5 ml-5">
 			<form>
-				Hello {user?.data?.userName}
-				{", "}
+				<h3 className="text-4xl">
+					Hello {user?.data?.userName}
+					{", "}
+				</h3>
 				<input
 					type="submit"
 					onClick={handleLogout}
 					value="Logout"
-					style={{
-						border: "1px dotted blue",
-					}}
+					className="border-2 border-black rounded-3xl py-1 px-6 mt-2"
 				/>
 			</form>
 		</div>
