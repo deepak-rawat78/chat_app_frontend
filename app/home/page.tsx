@@ -3,6 +3,7 @@
 import useCurrentUser from "@/lib/useCurrentUser";
 import React from "react";
 import { useRouter } from "next/navigation";
+import ChatCard from "@/src/components/chatCard/ChatCard";
 
 const Home = () => {
 	const { user, logout } = useCurrentUser();
@@ -23,6 +24,7 @@ const Home = () => {
 					Hello {user?.data?.userName}
 					{", "}
 				</h3>
+
 				<input
 					type="submit"
 					onClick={handleLogout}
@@ -30,6 +32,8 @@ const Home = () => {
 					className="border-2 border-black rounded-3xl py-1 px-6 mt-2"
 				/>
 			</form>
+			<ChatCard isActive={true} />
+			<ChatCard isActive={false} />
 		</div>
 	);
 };
