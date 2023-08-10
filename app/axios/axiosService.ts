@@ -1,7 +1,9 @@
 import axios from "axios";
 import endpoints from "./endpoints";
 
-axios.defaults.baseURL = "http://localhost:8000/chat_app";
+export const BASE_URL = "http://localhost:8000/chat_app";
+
+axios.defaults.baseURL = BASE_URL;
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
