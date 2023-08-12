@@ -7,6 +7,12 @@ const ChatView = (props: Props) => {
 	const {} = props;
 	return (
 		<div className="chat-container">
+			<div className="chat-header">
+				<div className="chat-header-inner">
+					<p className="chat-header--username">deepak-07</p>
+					<p className="chat-header--status">Active</p>
+				</div>
+			</div>
 			<div className="chat-message--container">
 				<Message value="das" isOwnMessage={true} />
 				<Message value="das" isOwnMessage={false} />
@@ -44,11 +50,11 @@ const ChatView = (props: Props) => {
 				/>
 			</div>
 			<div className="chat-input-container">
-				<input
-					type="text"
-					className="chat-input-text"
-					aria-multiline="true"
-				/>
+				<span
+					className="input chat-input-text"
+					role="textbox"
+					contentEditable
+				></span>
 				<input
 					type="submit"
 					className="chat-input-button"

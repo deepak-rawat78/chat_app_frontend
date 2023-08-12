@@ -35,7 +35,7 @@ const Message = (props: Props) => {
 							isOwnMessage ? "message-text" : "message-text-right"
 						}
 					>
-						{value}{" "}
+						{value}
 					</p>
 				</div>
 			</div>
