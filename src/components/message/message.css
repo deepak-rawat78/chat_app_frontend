@@ -22,10 +22,12 @@
 	font-family: sans-serif;
 	font-weight: lighter;
 }
+.message-text-right {
+	color: black;
+}
 .message-sender--name {
 	font-size: 12px;
-    font-weight: 600;
-
+	font-weight: 600;
 }
 .message-sender--name-left {
 	text-align: end;
@@ -34,4 +36,7 @@
 	border-radius: 6px;
 	padding: 4px 6px;
 	background-color: #075e54;
+}
+.message-text--container-right {
+	background-color: #ece5dd;
 }

@@ -23,8 +23,20 @@ const Message = (props: Props) => {
 				>
 					{isOwnMessage ? "You" : "Other"}
 				</p>
-				<div className="message-text--container ">
-					<p className="message-text">{value} </p>
+				<div
+					className={
+						isOwnMessage
+							? "message-text--container"
+							: "message-text--container message-text--container-right"
+					}
+				>
+					<p
+						className={
+							isOwnMessage ? "message-text" : "message-text-right"
+						}
+					>
+						{value}{" "}
+					</p>
 				</div>
 			</div>
 		</div>
