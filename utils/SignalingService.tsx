@@ -23,8 +23,8 @@ class SignalingService {
 		this.socket.on("message", callback);
 	};
 
-	sendMessage = (userId: string, message: string) => {
-		this.socket.emit("sendMessage", { sendTo: userId, message });
+	sendMessage = (data: { sendTo: string; from: string; message: string }) => {
+		this.socket.emit("sendMessage", data);
 	};
 }
 

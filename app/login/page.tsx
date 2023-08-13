@@ -12,6 +12,7 @@ export default function Login() {
 	const { user } = useCurrentUser();
 	const { login } = useLogin();
 	const { push } = useRouter();
+console.log(user,'user');
 
 	useEffect(() => {
 		if (user) {
@@ -61,7 +62,7 @@ export default function Login() {
 				<input
 					type="submit"
 					title="Login"
-					className="border-2 py-2 px-4 rounded-full bg-black text-white"
+					className="border-2 py-2 px-4 rounded-full bg-black text-black"
 				/>
 			</form>
 		</main>
