@@ -22,7 +22,7 @@ const Home = () => {
 	return (
 		<div className="mt-5 ml-5">
 			<h3 className="text-4xl">
-				Hello {user?.data?.username}
+				Hello {user?.data?.userName}
 				{", "}
 			</h3>
 			<ChatView />

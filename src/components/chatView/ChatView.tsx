@@ -15,8 +15,6 @@ const ChatView = (props: Props) => {
 	const [messageService, setMessageService] =
 		useState<SignalingService | null>(null);
 
-	let messageRef = useRef([]).current;
-
 	useEffect(() => {
 		if (user?.data?.userName) initMessageService();
 	}, [user?.data?.userName]);
@@ -34,13 +32,11 @@ const ChatView = (props: Props) => {
 	};
 
 	const getMessageListener = (data) => {
-		const list = [...messageRef, data];
-		setMessageList(list);
-		messageRef = list;
+		setMessageList((prevMessage) => [...prevMessage, data]);
 	};
 
 	const initMessageService = () => {
-		let temp = new SignalingService(user?.data?.userName);
+		let temp = new SignalingService(user?.data?._id);
 		temp.connect();
 
 		temp.getMessage(getMessageListener);
@@ -53,6 +49,15 @@ const ChatView = (props: Props) => {
 			from: user.data.userName,
 			message: messageText,
 		});
+		setMessageList((prevMessage) => [
+			...prevMessage,
+			{
+				sendTo:
+					user.data.userName === "deepak08" ? "deepak07" : "deepak08",
+				from: user.data.userName,
+				message: messageText,
+			},
+		]);
 	};
 
 	return (

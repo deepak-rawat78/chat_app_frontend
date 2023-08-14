@@ -12,9 +12,7 @@ class SignalingService {
 
 	connect = () => {
 		this.socket.on("connect", () => {
-			console.log(this.userId, "this.userId");
-
-			this.socket.emit("ready", { userName: this.userId });
+			this.socket.emit("ready", { userId: this.userId });
 		});
 		this.socket.connect();
 	};
