@@ -1,0 +1,21 @@
+.home-chat--list {
+	max-width: 350px;
+}
+.home-chat--container {
+	border: 1px solid black;
+	display: flex;
+	flex-direction: row;
+	height: 600px;
+}
+.home-chat--emptyView {
+	display: flex;
+	flex: 1;
+	border-left: 1px solid black;
+	justify-content: center;
+	align-items: center;
+}
+.home-chat--emptyText {
+}
+.home-addUser--container {
+	margin: 10px;
+}

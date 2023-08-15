@@ -6,7 +6,7 @@ import useCurrentUser from "@/lib/useCurrentUser";
 import SignalingService from "@/utils/SignalingService";
 
 const ChatView = (props: Props) => {
-	const {} = props;
+	const { userName: peerUserName } = props;
 	const { user, logout } = useCurrentUser();
 	const senderUserName =
 		user?.data?.userName !== "deepak08" ? "deepak07" : "deepak08";
@@ -45,15 +45,14 @@ const ChatView = (props: Props) => {
 
 	const sendMessage = () => {
 		messageService?.sendMessage({
-			sendTo: user.data.userName === "deepak08" ? "deepak07" : "deepak08",
+			sendTo: peerUserName,
 			from: user.data.userName,
 			message: messageText,
 		});
 		setMessageList((prevMessage) => [
 			...prevMessage,
 			{
-				sendTo:
-					user.data.userName === "deepak08" ? "deepak07" : "deepak08",
+				sendTo: peerUserName,
 				from: user.data.userName,
 				message: messageText,
 			},
@@ -64,9 +63,7 @@ const ChatView = (props: Props) => {
 		<div className="chat-container">
 			<div className="chat-header">
 				<div className="chat-header-inner">
-					<p className="chat-header--username">
-						{user?.data?.userName}
-					</p>
+					<p className="chat-header--username">{peerUserName}</p>
 					<p className="chat-header--status">Active</p>
 				</div>
 			</div>
