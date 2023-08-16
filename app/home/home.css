@@ -19,3 +19,9 @@
 .home-addUser--container {
 	margin: 10px;
 }
+
+.home-chat--list-error {
+	height: 50px;
+	border: 1px solid red;
+	margin: 0px 10px;
+}

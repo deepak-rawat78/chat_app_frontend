@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import axiosService from "@/axios/axiosService";
 
 const useCurrentUser = () => {
 	const [user, setUser] = useState<any>(null);
@@ -7,7 +8,9 @@ const useCurrentUser = () => {
 	useEffect(() => {
 		const currentUser = Cookies.get("loginInfo");
 		if (currentUser) {
-			setUser(JSON.parse(currentUser));
+			let userData = JSON.parse(currentUser);
+			axiosService.setToken(userData?.accessToken);
+			setUser(userData);
 		}
 	}, []);
 

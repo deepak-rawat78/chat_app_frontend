@@ -42,16 +42,40 @@ axios.interceptors.response.use(
 );
 
 const AxiosService = () => {
-	const get = (endpoint: string, params: any) => {
+	let token = "";
+	const setToken = (value: string) => {
+		token = value;
+	};
+
+	const get = (endpoint: string, params: any, useToken: boolean) => {
+		let headers = {};
+		if (useToken) {
+			headers = {
+				Authorization: token,
+			};
+		}
 		return axios.get(endpoint, {
 			params,
+			headers,
 		});
 	};
+
 	const post = (endpoint: string, body: any) => {
-		return axios.post(endpoint, { ...body });
+		console.log(token, "token");
+
+		return axios.post(
+			endpoint,
+			{ ...body },
+			{
+				headers: {
+					Authorization: token,
+				},
+			}
+		);
 	};
 	return {
 		get,
+		setToken,
 		post,
 	};
 };

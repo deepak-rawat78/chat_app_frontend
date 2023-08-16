@@ -21,7 +21,7 @@ const AddUser = (props: AddUserProp) => {
 			/>
 			<button
 				type="button"
-				className="adduser-input--button"
+				className="button adduser-input--button"
 				onClick={onClickSave}
 			>
 				Save

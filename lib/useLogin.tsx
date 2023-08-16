@@ -1,5 +1,5 @@
-import axiosService from "@/app/axios/axiosService";
-import endpoints from "@/app/axios/endpoints";
+import axiosService from "@/axios/axiosService";
+import endpoints from "@/axios/endpoints";
 import Cookie from "js-cookie";
 
 export const useLogin = () => {

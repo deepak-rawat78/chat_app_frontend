@@ -1,5 +1,11 @@
 export type ChatCardDataType = {
-	userName: string;
-	isActive: boolean;
-	lastMessageAt: Date;
+	contact: {
+		email: string;
+		userName: string;
+		_id: string;
+	};
+	contactType: "individual" | "group";
+	createdAt: string;
+	updatedAt: string;
+	_id: string;
 };

@@ -1,13 +1,14 @@
 "use client";
 
 import useCurrentUser from "@/lib/useCurrentUser";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ChatView from "@/src/components/chatView/ChatView";
 import "./home.css";
 import ChatCard from "@/src/components/chatCard";
 import { ChatCardDataType } from "./typings";
 import AddUser from "@/src/components/addUser";
+import { addContactApi, getUserContactListApi } from "@/apis/user";
 
 const data = [
 	{
@@ -29,6 +30,21 @@ const Home = () => {
 	const [selectedUser, setSelectedUser] = useState<ChatCardDataType | null>(
 		null
 	);
+	const [addContactResponse, setAddContactResponse] = useState({
+		isLoading: false,
+		errorMessage: "",
+	});
+	const [contactList, setContactList] = useState({
+		isLoading: false,
+		errorMessage: "",
+		data: [],
+	});
+
+	useEffect(() => {
+		if (user?.data) {
+			getUserContactList(0, 5);
+		}
+	}, [user]);
 
 	const handleLogout = () => {
 		logout().then(() => {
@@ -40,7 +56,57 @@ const Home = () => {
 		setSearchValue(value);
 	};
 
-	const handleClickOnSaveUserName = () => {};
+	const getUserContactList = (skip: number, limit: number) => {
+		if (skip === 0) {
+			setContactList({
+				isLoading: true,
+				errorMessage: "",
+				data: [],
+			});
+		} else {
+			setContactList({
+				...contactList,
+				isLoading: true,
+				errorMessage: "",
+			});
+		}
+		getUserContactListApi({ skip, limit })
+			.then((res) => {
+				setContactList({
+					isLoading: false,
+					errorMessage: "",
+					data: res.data.data,
+				});
+			})
+			.catch((error) => {
+				setContactList({
+					...contactList,
+					isLoading: false,
+					errorMessage: error.message,
+				});
+			});
+	};
+
+	const handleClickOnSaveUserName = () => {
+		setAddContactResponse({ isLoading: true, errorMessage: "" });
+		addContactApi({ peerUserName: searchValue })
+			.then(() => {
+				getUserContactList(0, 5);
+				setAddContactResponse({
+					isLoading: false,
+					errorMessage: "",
+				});
+			})
+			.catch((error) => {
+				setAddContactResponse({
+					isLoading: false,
+					errorMessage: error.message,
+				});
+			})
+			.finally(() => {
+				setSearchValue("");
+			});
+	};
 
 	const handleOnClickChatCard = (user: ChatCardDataType) => () => {
 		setSelectedUser(user);
@@ -48,9 +114,9 @@ const Home = () => {
 
 	const renderChatCard = (value: ChatCardDataType) => (
 		<ChatCard
-			isActive={value.isActive}
-			userName={value.userName}
-			lastMessageAt={new Date(value.lastMessageAt).toLocaleTimeString()}
+			isActive={false}
+			userName={value.contact.userName}
+			lastMessageAt={new Date(value.createdAt).toLocaleTimeString()}
 			onClick={handleOnClickChatCard(value)}
 		/>
 	);
@@ -75,10 +141,10 @@ const Home = () => {
 						/>
 					</div>
 
-					{data.map(renderChatCard)}
+					{contactList?.data?.data?.map(renderChatCard)}
 				</div>
 				{selectedUser ? (
-					<ChatView userName={selectedUser?.userName} />
+					<ChatView userName={selectedUser?.contact.userName} />
 				) : (
 					<div className="home-chat--emptyView">
 						<p className="home-chat--emptyText">
