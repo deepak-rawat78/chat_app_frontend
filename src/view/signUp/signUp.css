@@ -46,3 +46,13 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.signUp-form--error {
+	color: red;
+	text-align: center;
+}
+
+.signUp-form--success {
+	color: green;
+	text-align: center;
+}
