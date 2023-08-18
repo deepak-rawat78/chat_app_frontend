@@ -6,10 +6,12 @@ import useCurrentUser from "@/lib/useCurrentUser";
 import SignalingService from "@/utils/SignalingService";
 
 const ChatView = (props: Props) => {
-	const { userName: peerUserName } = props;
+	const { selectedChat } = props;
+	const {
+		contact: { userName: peerUserName, _id: peerId },
+	} = selectedChat;
 	const { user, logout } = useCurrentUser();
-	const senderUserName =
-		user?.data?.userName !== "deepak08" ? "deepak07" : "deepak08";
+
 	const [messageText, setMessageText] = useState("");
 	const [messageList, setMessageList] = useState([]);
 	const [messageService, setMessageService] =
@@ -52,9 +54,11 @@ const ChatView = (props: Props) => {
 		setMessageList((prevMessage) => [
 			...prevMessage,
 			{
-				sendTo: peerUserName,
-				from: user.data.userName,
-				message: messageText,
+				value: messageText,
+				status: null,
+				sender: { _id: user.data._id },
+				recevier: { _id: peerId },
+				_id: null,
 			},
 		]);
 	};
@@ -68,12 +72,13 @@ const ChatView = (props: Props) => {
 				</div>
 			</div>
 			<div className="chat-message--container">
-				{messageList.map((value: any, index: number) => (
+				{messageList.map((messageData: any, index: number) => (
 					<Message
 						key={index}
-						from={value.from}
-						value={value.message}
-						isOwnMessage={senderUserName === value.from}
+						senderUserName={messageData.sender.userName}
+						from={messageData.from}
+						value={messageData.value}
+						isOwnMessage={user.data._id === messageData.sender._id}
 					/>
 				))}
 			</div>

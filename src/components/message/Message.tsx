@@ -3,7 +3,7 @@ import { Props } from "./typings";
 import "./message.css";
 
 const Message = (props: Props) => {
-	const { value, isOwnMessage, from } = props;
+	const { value, isOwnMessage, senderUserName } = props;
 
 	return (
 		<div className="message-container">
@@ -21,7 +21,7 @@ const Message = (props: Props) => {
 							: "message-sender--name"
 					}
 				>
-					{isOwnMessage ? "You" : from ?? "Other"}
+					{isOwnMessage ? "You" : senderUserName ?? "Other"}
 				</p>
 				<div
 					className={

@@ -1,3 +1,3 @@
 export type Props = {
-	userName: string;
+	selectedChat: any;
 };

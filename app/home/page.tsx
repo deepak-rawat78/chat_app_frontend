@@ -48,7 +48,7 @@ const Home = () => {
 
 	const handleLogout = () => {
 		logout().then(() => {
-			router.replace("/login");
+			router.replace("/");
 		});
 	};
 
@@ -144,7 +144,7 @@ const Home = () => {
 					{contactList?.data?.data?.map(renderChatCard)}
 				</div>
 				{selectedUser ? (
-					<ChatView userName={selectedUser?.contact.userName} />
+					<ChatView selectedChat={selectedUser} />
 				) : (
 					<div className="home-chat--emptyView">
 						<p className="home-chat--emptyText">
